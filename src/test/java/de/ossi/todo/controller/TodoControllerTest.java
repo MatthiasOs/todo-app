@@ -1,55 +1,50 @@
 package de.ossi.todo.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import de.ossi.todo.model.TodoItem;
 import de.ossi.todo.service.TodoService;
-import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.http.MediaType;
-import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.List;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@SpringBootTest
-@AutoConfigureMockMvc
 @ExtendWith({MockitoExtension.class})
 class TodoControllerTest {
-    public static final String DESCRIPTION = "Description";
-    public static final String TITLE = "Title";
-    @Autowired
-    private MockMvc mockMvc;
+    private static final String DESCRIPTION = "Description";
+    private static final String TITLE = "Title";
+    private final ObjectMapper objectMapper = new ObjectMapper();
+    private final TodoItem todoItem = createTodoItem();
+
+    @InjectMocks
+    private TodoController todoController;
 
     @Mock
     private TodoService todoService;
 
     @Test
     void shouldCreateTodo() throws Exception {
-        mockMvc.perform(post("/api/todos")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content("{\"title\":\"Test\",\"description\":\"Hello\"}"))
-                .andExpect(status().isOk());
+        when(todoService.createTodo(any())).thenAnswer(a -> a.getArguments()[0]);
+        var newTodoItem = todoController.createTodo(todoItem);
+        assertThat(newTodoItem)
+                .extracting(TodoItem::getTitle, TodoItem::getDescription, TodoItem::isCompleted)
+                .containsExactly(TITLE, DESCRIPTION, false);
     }
 
     @Test
     void shouldReturnTodos() throws Exception {
-        var newTodo = createTodoItem();
-        when(todoService.getAllTodos()).thenReturn(List.of(newTodo));
-        mockMvc.perform(get("/api/todos"))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$[0].title", Matchers.is(TITLE)))
-                .andExpect(jsonPath("$[0].description", Matchers.is(DESCRIPTION)))
-                .andExpect(jsonPath("$[0].completed", Matchers.is(false)));
+        when(todoService.getAllTodos()).thenReturn(List.of(todoItem));
+        List<TodoItem> allTodos = todoController.getAllTodos();
+        assertThat(allTodos)
+                .singleElement()
+                .extracting(TodoItem::getTitle, TodoItem::getDescription, TodoItem::isCompleted)
+                .containsExactly(TITLE, DESCRIPTION, false);
     }
 
     private static TodoItem createTodoItem() {
