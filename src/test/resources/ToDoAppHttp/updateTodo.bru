@@ -1,0 +1,28 @@
+meta {
+  name: updateTodo
+  type: http
+  seq: 4
+}
+
+put {
+  url: http://localhost:9090/api/todos/1
+  body: json
+  auth: inherit
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "title": "Einkaufen2",
+    "description": "Milch, Brot und Butter kaufen",
+    "completed": false
+  }
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

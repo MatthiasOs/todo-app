@@ -1,25 +1,17 @@
 meta {
-  name: CreateNew
+  name: getAllTodos
   type: http
   seq: 2
 }
 
-post {
+get {
   url: http://localhost:9090/api/todos
-  body: json
+  body: none
   auth: inherit
 }
 
 headers {
   Content-Type: application/json
-}
-
-body:json {
-  {
-    "title": "Einkaufen",
-    "description": "Milch, Brot und Butter kaufen",
-    "completed": false
-  }
 }
 
 settings {
