@@ -15,6 +15,18 @@ public class TodoItem {
     private LocalDateTime updatedAt;
     private boolean completed;
 
+    @Override
+    public String toString() {
+        return "TodoItem{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", createdAt=" + createdAt +
+                ", updatedAt=" + updatedAt +
+                ", completed=" + completed +
+                '}';
+    }
+
     @PrePersist
     public void onCreate() {
         createdAt = LocalDateTime.now();
@@ -43,6 +55,10 @@ public class TodoItem {
 
     public void setCompleted(boolean completed) {
         this.completed = completed;
+    }
+
+    public Long getId() {
+        return id;
     }
 
     @PreUpdate

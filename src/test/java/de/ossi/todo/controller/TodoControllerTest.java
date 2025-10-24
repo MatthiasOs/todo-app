@@ -1,6 +1,5 @@
 package de.ossi.todo.controller;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import de.ossi.todo.model.TodoItem;
 import de.ossi.todo.service.TodoService;
 import org.junit.jupiter.api.Test;
@@ -15,11 +14,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
-@ExtendWith({MockitoExtension.class})
+@ExtendWith(MockitoExtension.class)
 class TodoControllerTest {
     private static final String DESCRIPTION = "Description";
     private static final String TITLE = "Title";
-    private final ObjectMapper objectMapper = new ObjectMapper();
     private final TodoItem todoItem = createTodoItem();
 
     @InjectMocks
