@@ -1,8 +1,8 @@
-package controller;
+package de.ossi.todo.controller;
 
-import model.TodoItem;
+import de.ossi.todo.model.TodoItem;
+import de.ossi.todo.service.TodoService;
 import org.springframework.web.bind.annotation.*;
-import service.TodoService;
 
 import java.util.List;
 

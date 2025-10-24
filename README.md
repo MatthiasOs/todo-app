@@ -1,9 +1,19 @@
-# TODO
+# SpringBoot TODO List App
 
-## SpringBoot Anwendung
+- Java 25
+- SpringBoot REST
+    - GET/POST/UPDATE/DELETE operations
+- H2 in Memory DB
+    - Console: http://localhost:9090/h2-console
+- Example http requests in src/test/resources/ToDoAppHttp
+    - use [Bruno](https://www.usebruno.com/downloads) to execute the requests
 
-- per GET/POST/DELETE TODO Einträge erstellen/löschen
+## Start
 
-## In Memory DB
+```bash
+./mvnw spring-boot:run
+```
 
-- Einträge in DB Speichern
+## TODO
+
+- Nicht direkt die Entity zurück geben, sondern auf ein DTO mappen, damit man technische Details verstecken kann 

@@ -1,0 +1,28 @@
+meta {
+  name: CreateNew
+  type: http
+  seq: 2
+}
+
+post {
+  url: http://localhost:9090/api/todos
+  body: json
+  auth: inherit
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "title": "Einkaufen",
+    "description": "Milch, Brot und Butter kaufen",
+    "completed": false
+  }
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}
