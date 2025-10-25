@@ -161,6 +161,7 @@ DELETE http://localhost:9090/api/todos/1
 
 ## 📋 TODOs / Next Steps
 
+- [ ] Add Dockerfile for containerized deployment
 - [ ] Add validation for request data using `@Valid`
 - [ ] Implement exception handling (`@ControllerAdvice`)
 - [ ] Add Swagger / OpenAPI documentation
