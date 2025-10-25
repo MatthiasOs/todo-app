@@ -172,7 +172,7 @@ DELETE http://localhost:9090/api/todos/1
 
 ## 👨‍💻 Author
 
-**Ossi**  
+**Matthias O.**  
 A project to learn Spring Boot, REST APIs, and test automation.
 
 ---
