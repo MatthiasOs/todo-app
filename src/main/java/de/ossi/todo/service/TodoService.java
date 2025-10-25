@@ -11,7 +11,7 @@ import java.util.List;
 @Service
 public class TodoService {
 
-    private TodoRepository todoRepository;
+    private final TodoRepository todoRepository;
 
     @Autowired
     public TodoService(TodoRepository todoRepository) {
@@ -22,7 +22,7 @@ public class TodoService {
         return todoRepository.findAll();
     }
 
-    public List<TodoItem> getAllTodosCompleted() {
+    public List<TodoItem> getAllCompletedTodos() {
         return todoRepository.findByCompleted(true);
     }
 
@@ -44,7 +44,7 @@ public class TodoService {
         todoItemOld.setTitle(updated.getTitle());
         todoItemOld.setDescription(updated.getDescription());
         todoItemOld.setCompleted(updated.isCompleted());
-        return todoRepository.save(updated);
+        return todoRepository.save(todoItemOld);
     }
 
     public void deleteTodo(Long id) {
