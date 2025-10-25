@@ -20,6 +20,11 @@ public class TodoController {
         return service.getAllTodos();
     }
 
+    @GetMapping("/completed")
+    public List<TodoItem> getAllCompletedTodos() {
+        return service.getAllCompletedTodos();
+    }
+
     @GetMapping("/{id}")
     public TodoItem getTodoById(@PathVariable Long id) {
         return service.getTodoById(id);

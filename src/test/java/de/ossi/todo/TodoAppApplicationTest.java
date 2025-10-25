@@ -95,18 +95,38 @@ class TodoAppApplicationTest {
                 .satisfies(isTodoItem(updatedTodo));
     }
 
+    @Test
+    void shouldReturnOnlyCompletedTodoItem() {
+        var completedTodo = createTodoItem(true);
+        var newTodo = createTodoItem();
+        restTemplate.postForEntity(baseUrl(), completedTodo, TodoItem.class);
+        restTemplate.postForEntity(baseUrl(), newTodo, TodoItem.class);
+
+        var responseBody = restTemplate.getForEntity(baseUrl() + "/completed", TodoItem[].class).getBody();
+        assertThat(responseBody).isNotNull();
+
+        assertThat(responseBody)
+                .singleElement()
+                .doesNotHave(isTodoItem(newTodo))
+                .satisfies(isTodoItem(completedTodo));
+    }
+
     private List<TodoItem> restReadAll() {
         var responseBody = restTemplate.getForEntity(baseUrl(), TodoItem[].class).getBody();
         assertThat(responseBody).isNotNull();
         return Arrays.asList(responseBody);
     }
 
-    private static TodoItem createTodoItem() {
+    private static TodoItem createTodoItem(boolean completed) {
         var newTodo = new TodoItem();
-        newTodo.setCompleted(false);
+        newTodo.setCompleted(completed);
         newTodo.setDescription(DESCRIPTION);
         newTodo.setTitle(TITLE);
         return newTodo;
+    }
+
+    private static TodoItem createTodoItem() {
+        return createTodoItem(false);
     }
 
     private static Condition<TodoItem> isTodoItem(TodoItem todoItem) {
