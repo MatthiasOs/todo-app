@@ -26,5 +26,8 @@
 - Tests: Die Springboot App testen mit `@SpringBootTest`
     - `@TestRestTemplate` zum Absetzen der Rest Requests
     - Tipp: `@LocalServerPort` um den Server-Port im Test dynamisch auszulesen
-- Erweiterung: statt InMemory DB, die Daten persistieren
+
+## Erweiterung
+
+- statt InMemory DB, die Daten persistieren
 
