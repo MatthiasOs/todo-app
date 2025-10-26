@@ -8,11 +8,11 @@ Perfect for practicing HTTP requests (GET, POST, PUT, DELETE) and integration te
 ## 🚀 Features
 
 - CRUD operations for TODO items:
-    - `GET /api/todos` → Retrieve all Todos
-    - `GET /api/todos/completed` → Retrieve all completed Todos
-    - `POST /api/todos` → Create a new Todo
-    - `PUT /api/todos/{id}` → Update a Todo
-    - `DELETE /api/todos/{id}` → Delete a Todo
+    - `GET /api/v1/todos` → Retrieve all Todos
+    - `GET /api/v1/todos/completed` → Retrieve all completed Todos
+    - `POST /api/v1/todos` → Create a new Todo
+    - `PUT /api/v1/todos/{id}` → Update a Todo
+    - `DELETE /api/v1/todos/{id}` → Delete a Todo
 - In-memory database (**H2**)
 - Web console for H2 access
 - Unit and integration tests (JUnit 5 + AssertJ)
@@ -122,13 +122,13 @@ mvn test
 ### GET all Todos
 
 ```
-GET http://localhost:9090/api/todos
+GET http://localhost:9090/api/v1/todos
 ```
 
 ### POST create a new Todo
 
 ```json
-POST http://localhost:9090/api/todos
+POST http://localhost:9090/api/v1/todos
 Content-Type: application/json
 
 {
@@ -141,7 +141,7 @@ Content-Type: application/json
 ### PUT update a Todo
 
 ```json
-PUT http://localhost:9090/api/todos/1
+PUT http://localhost:9090/api/v1/todos/1
 Content-Type: application/json
 
 {
@@ -154,7 +154,7 @@ Content-Type: application/json
 ### DELETE a Todo
 
 ```
-DELETE http://localhost:9090/api/todos/1
+DELETE http://localhost:9090/api/v1/todos/1
 ```
 
 ---

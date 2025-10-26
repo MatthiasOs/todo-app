@@ -41,7 +41,7 @@ class TodoAppApplicationTest {
     }
 
     private String baseUrl() {
-        return "http://localhost:" + port + "/api/todos";
+        return "http://localhost:" + port + "/api/v1/todos";
     }
 
     @Test
