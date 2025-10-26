@@ -29,5 +29,5 @@
 
 ## Erweiterung
 
-- statt InMemory DB, die Daten persistieren
+- Statt InMemory DB, die Daten persistieren
 
