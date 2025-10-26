@@ -1,6 +1,6 @@
 # TODO-App
 
-## Springboot
+## SpringbootApp
 
 - Erstelle ein Springboot TODO-App mit der man Aufgaben (`TodoItem`) anlegen, ändern, löschen kann.
 - Ein Springboot App besteht aus:
@@ -16,7 +16,13 @@
             - Interface extends `JpaRepository`
         - Model: `TodoItem` (`@Entity`)
             - Mit Id als `@Id` und `@GeneratedValue(strategy = GenerationType.IDENTITY)`
+
+## DB
+
 - InMemory DB verwenden, zB H2
+
+## Tests
+
 - Tests: Die Springboot App testen mit `@SpringBootTest`
     - `@TestRestTemplate` zum Absetzen der Rest Requests
     - Tipp: `@LocalServerPort` um den Server-Port im Test dynamisch auszulesen
