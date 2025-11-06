@@ -25,6 +25,8 @@ Perfect for practicing HTTP requests (GET, POST, PUT, DELETE) and integration te
 
 ```
 todo-app/
+ ├─ .github/workflows/
+ │  └─ docker.yml          → github Docker Build & Publish Action
  ├─ src/
  │  ├─ main/
  │  │  ├─ java/de/ossi/todo/
@@ -39,7 +41,7 @@ todo-app/
  │     │  ├─ controller/   → Unit test
  │     │  └─ ApplicationTest
  │     └─ resources/
- │        └─ ToDoAppHttp -> Bruno Http Test Requests
+ │        └─ ToDoAppHttp → Bruno Http Test Requests
  ├─ Dockerfile
  ├─ .dockerignore
  └─ pom.xml
@@ -79,20 +81,44 @@ mvn spring-boot:run
 
 ---
 
-### **Option 3: Using Docker**
+## 🐳 Docker & Docker Compose
 
-1. **Build the Docker image:**
-   ```bash
-   docker build -t todo-app:latest .
-   ```
+### Running the TODO App with Docker
 
-2. **Run the container:**
-   ```bash
-   docker run -p 9090:9090 todo-app:latest
-   ```
+You can run the app locally using Docker without installing Java or Maven:
 
-3. The app is now available at:  
-   👉 [http://localhost:9090](http://localhost:9090)
+```bash
+docker pull ghcr.io/matthiasos/todo-app:latest
+docker run -p 9090:9090 ghcr.io/matthiasos/todo-app:latest
+```
+
+### Example docker-compose.yml
+
+You can also use `docker-compose.yaml` to start the app:
+
+```yaml
+services:
+  todo-app:
+    image: ghcr.io/matthiasos/todo-app:latest
+    container_name: todo-app
+    ports:
+      - "9090:9090"
+    restart: unless-stopped
+```
+
+Start it with:
+
+```bash
+docker-compose up -d
+```
+
+Stop it with:
+
+```bash
+docker-compose down
+```
+
+After this, the app is available at http://localhost:9090.
 
 ---
 
