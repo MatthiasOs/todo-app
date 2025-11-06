@@ -61,6 +61,26 @@ class TodoAppApplicationTest {
     }
 
     @Test
+    void shouldCreateAndGetByIdTodoItem() {
+        var newTodo = createTodoItem();
+        ResponseEntity<TodoItem> postResponse = restTemplate.postForEntity(baseUrl(), newTodo, TodoItem.class);
+        assertThat(postResponse.getStatusCode()).isEqualTo(HttpStatus.OK);
+
+        var createdTodoItem = postResponse.getBody();
+        assertThat(createdTodoItem)
+                .satisfies(defaultTodoItem)
+                .extracting(TodoItem::getId)
+                .isNotNull();
+
+        var byIdTodoItem = restTemplate.getForEntity(baseUrl() + "/" + createdTodoItem.getId(), TodoItem.class).getBody();
+        assertThat(byIdTodoItem)
+                .satisfies(defaultTodoItem)
+                .extracting(TodoItem::getId)
+                .isNotNull()
+                .isEqualTo(createdTodoItem.getId());
+    }
+
+    @Test
     void shouldDeleteTodoItem() {
         var newTodo = createTodoItem();
         ResponseEntity<TodoItem> postResponse = restTemplate.postForEntity(baseUrl(), newTodo, TodoItem.class);
