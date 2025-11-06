@@ -17,6 +17,7 @@ Perfect for practicing HTTP requests (GET, POST, PUT, DELETE) and integration te
 - Web console for H2 access
 - Unit and integration tests (JUnit 5 + AssertJ)
 - Testable via **Bruno** or **Postman**
+- Can be built and run as a **Docker container**
 
 ---
 
@@ -39,6 +40,8 @@ todo-app/
  │     │  └─ ApplicationTest
  │     └─ resources/
  │        └─ ToDoAppHttp -> Bruno Http Test Requests
+ ├─ Dockerfile
+ ├─ .dockerignore
  └─ pom.xml
 ```
 
@@ -49,6 +52,7 @@ todo-app/
 - Java 25 (or compatible version)
 - Maven 3.9+
 - IntelliJ IDEA or another IDE with Spring support
+- (optional) Docker installed for containerization
 
 ---
 
@@ -75,6 +79,23 @@ mvn spring-boot:run
 
 ---
 
+### **Option 3: Using Docker**
+
+1. **Build the Docker image:**
+   ```bash
+   docker build -t todo-app:latest .
+   ```
+
+2. **Run the container:**
+   ```bash
+   docker run -p 9090:9090 todo-app:latest
+   ```
+
+3. The app is now available at:  
+   👉 [http://localhost:9090](http://localhost:9090)
+
+---
+
 ## 🗄️ H2 Database
 
 **Configuration (application.properties):**
@@ -91,7 +112,7 @@ spring.jpa.show-sql=true
 server.port=9090
 ```
 
-**H2 Console:**
+**H2 Console:**  
 👉 [http://localhost:9090/h2-console](http://localhost:9090/h2-console)
 
 JDBC URL:
@@ -161,7 +182,6 @@ DELETE http://localhost:9090/api/v1/todos/1
 
 ## 📋 TODOs / Next Steps
 
-- [ ] Add Dockerfile for containerized deployment
 - [ ] Add validation for request data using `@Valid`
 - [ ] Implement exception handling (`@ControllerAdvice`)
 - [ ] Add Swagger / OpenAPI documentation
